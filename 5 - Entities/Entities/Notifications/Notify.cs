@@ -7,6 +7,8 @@ namespace Entities.Notifications
         public Notify()
         {
             Notifications = new List<Notify>();
+            PropertyName = string.Empty;
+            Message = string.Empty;
         }
         
         public string PropertyName { get; set; }
@@ -20,7 +22,7 @@ namespace Entities.Notifications
             // This property is mandatory
             if (string.IsNullOrEmpty(Value) || string.IsNullOrEmpty(PropertyName))
             {
-                Notifications.add(new Notify
+                Notifications.Add(new Notify
                 {
                     Message = "Mandatory property",
                     PropertyName = PropertyName
@@ -40,7 +42,7 @@ namespace Entities.Notifications
             bool success = int.TryParse(Value, out number);
             if (number < 1  || string.IsNullOrWhiteSpace(PropertyName))
             {
-                Notifications.add(new Notify
+                Notifications.Add(new Notify
                 {
                     Message = "Value must be greater than zero",
                     PropertyName = PropertyName
