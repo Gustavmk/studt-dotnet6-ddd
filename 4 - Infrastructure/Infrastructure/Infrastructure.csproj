@@ -20,4 +20,9 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\3 - Domain\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\5 - Entities\Entities\Entities.csproj" />
+    </ItemGroup>
+
 </Project>
