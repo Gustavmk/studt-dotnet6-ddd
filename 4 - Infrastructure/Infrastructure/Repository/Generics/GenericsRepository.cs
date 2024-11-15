@@ -10,15 +10,15 @@ namespace Infrastructure.Repository.Generics
     public class GenericsRepository<T> : IGeneric<T>, IDisposable where T : class
     {
         
-        private readonly DbContextOptions<Context> _OptionsBuilder;
+        private readonly DbContextOptions<Context> _optionsBuilder;
         
         public GenericsRepository()
         {
-            _OptionsBuilder = new DbContextOptions<Context>();
+            _optionsBuilder = new DbContextOptions<Context>();
         }
         public async Task Add(T Object)
         {
-            using (var data = new Context(_OptionsBuilder))
+            using (var data = new Context(_optionsBuilder))
             {
                await data.Set<T>().AddAsync(Object);
                await data.SaveChangesAsync();
@@ -27,7 +27,7 @@ namespace Infrastructure.Repository.Generics
 
         public async Task Update(T Object)
         {
-            using (var data = new Context(_OptionsBuilder))
+            using (var data = new Context(_optionsBuilder))
             {
                 data.Set<T>().Update(Object);
                 await data.SaveChangesAsync();
@@ -36,7 +36,7 @@ namespace Infrastructure.Repository.Generics
 
         public async Task Delete(T Object)
         {
-            using (var data = new Context(_OptionsBuilder))
+            using (var data = new Context(_optionsBuilder))
             {
                 data.Set<T>().Remove(Object);
                 await data.SaveChangesAsync();
@@ -45,7 +45,7 @@ namespace Infrastructure.Repository.Generics
 
         public async Task<T> GetEntityById(int Id)
         {
-            using (var data = new Context(_OptionsBuilder))
+            using (var data = new Context(_optionsBuilder))
             {
                 return await data.Set<T>().FindAsync(Id);
             }
@@ -53,7 +53,7 @@ namespace Infrastructure.Repository.Generics
 
         public async Task<List<T>> List()
         {
-            using (var data = new Context(_OptionsBuilder))
+            using (var data = new Context(_optionsBuilder))
             {
                 return await data.Set<T>().AsNoTracking().ToListAsync(); //AsNoTracking evita que traga toda configuração do EF
             }
